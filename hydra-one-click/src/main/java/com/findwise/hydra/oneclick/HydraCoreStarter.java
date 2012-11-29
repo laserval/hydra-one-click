@@ -4,10 +4,11 @@ import com.findwise.hydra.Main;
 
 public class HydraCoreStarter {
 
+	private static final String HYDRA_CORE_PROPERTIES = "../hydra-core.properties";
 	
 	public Thread startHydraCore() {
 		
-		String[] hydraArgs = {};
+		String[] hydraArgs = {HYDRA_CORE_PROPERTIES};
 		
 		Runnable hydraRunnable = new HydraCoreRunnable(hydraArgs);
 		Thread hydraThread = new Thread(hydraRunnable);

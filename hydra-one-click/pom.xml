@@ -16,6 +16,7 @@
 		<hydraVersion>0.3.0-SNAPSHOT</hydraVersion>
 		<jettyRunnerVersion>8.1.8.v20121106</jettyRunnerVersion>
 		<junitVersion>3.8.1</junitVersion>
+		<httpcomponentsVersion>4.2.1</httpcomponentsVersion>
 	</properties>
 
 	<dependencies>
@@ -46,12 +47,17 @@
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpclient</artifactId>
-			<version>4.2.1</version>
+			<version>${httpcomponentsVersion}</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.httpcomponents</groupId>
 			<artifactId>httpmime</artifactId>
-			<version>4.2.1</version>
+			<version>${httpcomponentsVersion}</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-exec</artifactId>
+			<version>1.1</version>
 		</dependency>
 	</dependencies>
 

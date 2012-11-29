@@ -26,27 +26,26 @@ import org.apache.http.protocol.HttpContext;
 public class Starter {
 
 	public static void main(String[] args) {
-		MongoStarter mongoStarter = new MongoStarter();
-		Process p = null;
 		try {
 			System.out.println(": Starting MongoDB");
-			p = mongoStarter.startMongo();
+			MongoProcessManager.startMongo();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Error: " + e);
+			System.exit(1);
 		}
 
+		System.out.println(": Starting Admin Service");
 		JettyStarter jettyStarter = new JettyStarter();
 		Thread jt = jettyStarter.startJetty();
-
+		
+		System.out.println(": Starting Hydra Core");
 		HydraCoreStarter hydraStarter = new HydraCoreStarter();
 		Thread ht = hydraStarter.startHydraCore();
-
+		
 		try {
 			Thread.sleep(10000);
 		} catch (InterruptedException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			
 		}
 
 		String baseUrl = "http://localhost:9090/hydra/libraries/";
