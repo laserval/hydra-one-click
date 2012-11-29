@@ -48,36 +48,4 @@ public class MongoStarter {
 
 		return true;
 	}
-	
-//	  public static void shutdown_mongodb() throws IOException {
-//	        Mongo mongo = new Mongo();
-//	        try {
-//	            DB db = mongo.getDB("admin");
-//	            CommandResult shutdownResult = db.command(new BasicDBObject("shutdown", 1));
-//	            shutdownResult.throwOnError();
-//	            fail("Expecting to loose mongodb connection on shutdown.");
-//	        } catch (Throwable e) {
-//	            assertThat(e.getMessage()).isEqualTo("can't call something : /127.0.0.1:27017/admin");
-//	        } finally {
-//	            mongo.close();
-//	            ensureDbPathDoesNotExits();
-//	        }
-//	    }
-	
-//	private static List startMongoDBAsADaemon() throws IOException, InterruptedException {
-//        ProcessBuilder processBuilder = new ProcessBuilder("../../mongodb-osx-x86_64-2.0.3/bin/mongod", "--dbpath",
-//                "dbpath", "--fork", "--logpath", "logpath");
-//        processBuilder.directory(new File("target"));
-//        processBuilder.redirectErrorStream(true);
-//        Process pwd = processBuilder.start();
-//        BufferedReader outputReader = new BufferedReader(new InputStreamReader(pwd.getInputStream()));
-//        String output;
-//        List lines = new ArrayList();
-//        while ((output = outputReader.readLine()) != null) {
-//            lines.add(output.toString());
-//        }
-//        pwd.waitFor();
-//        assertThat(pwd.exitValue()).isEqualTo(0);
-//        return lines;
-//    }
 }
