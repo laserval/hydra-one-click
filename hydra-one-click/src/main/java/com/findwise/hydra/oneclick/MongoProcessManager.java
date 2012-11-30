@@ -19,12 +19,12 @@ public class MongoProcessManager {
 	
 	private static final String MONGO_ADMIN_DB = "admin";
 	
-	private static final String MONGO_HOME = "../mongodb";
+	private static final String MONGO_HOME = "mongodb";
 	private static final String MONGO_EXECUTABLE = "bin" + File.separator + "mongod";
 	private static final String MONGO_OPTIONS_PREFIX = "--";
 	private static final String MONGO_OPTION_FORK = "fork";
 	private static final String MONGO_OPTION_LOGPATH = "logpath";
-	private static final String MONGO_OPTION_LOGPATH_DEFAULT = "../logs" + File.separator + "mongolog";
+	private static final String MONGO_OPTION_LOGPATH_DEFAULT = "logs" + File.separator + "mongo.log";
 	private static final String MONGO_OPTION_DBPATH = "dbpath";
 	private static final String MONGO_OPTION_DBPATH_DEFAULT= MONGO_HOME + File.separator + "db";
 	

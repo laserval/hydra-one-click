@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -23,46 +22,35 @@ import org.apache.http.params.CoreProtocolPNames;
 import org.apache.http.protocol.BasicHttpContext;
 import org.apache.http.protocol.HttpContext;
 
-public class Starter {
+public class AdminServiceClient {
 
-	public static void main(String[] args) {
-		try {
-			System.out.println(": Starting MongoDB");
-			MongoProcessManager.startMongo();
-		} catch (IOException e) {
-			System.out.println("Error: " + e);
-			System.exit(1);
+	private final String baseUrl;
+	
+	private static final String LIBRARIES_ENDPOINT = "/libraries/";
+	
+	public AdminServiceClient() {
+		 baseUrl = "http://localhost:9090/hydra";
+	}
+	
+	public AdminServiceClient(String url) {
+		baseUrl = url;
+	}
+	
+	public void postStages(Map<String, String> stages) {
+		for (Entry<String, String> entry : stages.entrySet()) {
+			try {
+				postJson(baseUrl + LIBRARIES_ENDPOINT + entry.getKey(), entry.getValue());
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
-
-		System.out.println(": Starting Admin Service");
-		JettyStarter jettyStarter = new JettyStarter();
-		Thread jt = jettyStarter.startJetty();
-		
-		System.out.println(": Starting Hydra Core");
-		HydraCoreStarter hydraStarter = new HydraCoreStarter();
-		Thread ht = hydraStarter.startHydraCore();
-		
-		try {
-			Thread.sleep(10000);
-		} catch (InterruptedException e1) {
-			
-		}
-
-		String baseUrl = "http://localhost:9090/hydra/libraries/";
-
-		Map<String, String> libraries = new HashMap<String, String>();
-		libraries.put("basic",
-				"../lib/hydra-basic-stages-jar-with-dependencies.jar");
-		libraries.put("json-out",
-				"../lib/hydra-json-out-stage-jar-with-dependencies.jar");
-		libraries.put("tika",
-				"../lib/hydra-tika-stages-jar-with-dependencies.jar");
-		libraries.put("web",
-				"../lib/hydra-web-stages-jar-with-dependencies.jar");
-
+	}
+	
+	public void postLibraries(Map<String, String> libraries) {
 		for (Entry<String, String> entry : libraries.entrySet()) {
 			try {
-				postFile(baseUrl + entry.getKey(), entry.getValue());
+				postFile(baseUrl + LIBRARIES_ENDPOINT + entry.getKey(), entry.getValue());
 			} catch (ClientProtocolException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -71,27 +59,9 @@ public class Starter {
 				e.printStackTrace();
 			}
 		}
-
-		Map<String, String> stages = new HashMap<String, String>();
-		stages.put("basic/stages/matchRegex",
-				"../examples/stages/matchRegex.properties");
-		stages.put("web/stages/htmlExtract",
-				"../examples/stages/htmlExtract.properties");
-		stages.put("json-out/stages/jsonOutput",
-				"../examples/stages/jsonOutput.properties");
-
-		for (Entry<String, String> entry : stages.entrySet()) {
-			try {
-				postJson(baseUrl + entry.getKey(), entry.getValue());
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-		}
-
 	}
-
-	private static void postJson(String url, String path) throws IOException {
+	
+	public void postJson(String url, String path) throws IOException {
 		HttpClient client = new DefaultHttpClient();
 		HttpContext context = new BasicHttpContext();
 		client.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION,
@@ -117,7 +87,7 @@ public class Starter {
 		client.getConnectionManager().shutdown();
 	}
 
-	private static void postFile(String url, String path) throws IOException {
+	public void postFile(String url, String path) throws IOException {
 		HttpClient client = new DefaultHttpClient();
 		HttpContext context = new BasicHttpContext();
 		client.getParams().setParameter(CoreProtocolPNames.PROTOCOL_VERSION,
@@ -138,4 +108,5 @@ public class Starter {
 		client.getConnectionManager().shutdown();
 
 	}
+	
 }

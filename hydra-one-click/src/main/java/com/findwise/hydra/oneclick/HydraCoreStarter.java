@@ -1,10 +1,12 @@
 package com.findwise.hydra.oneclick;
 
+import java.io.File;
+
 import com.findwise.hydra.Main;
 
 public class HydraCoreStarter {
 
-	private static final String HYDRA_CORE_PROPERTIES = "../hydra-core.properties";
+	private static final String HYDRA_CORE_PROPERTIES = "config" + File.separator + "hydra-core.properties";
 	
 	public Thread startHydraCore() {
 		

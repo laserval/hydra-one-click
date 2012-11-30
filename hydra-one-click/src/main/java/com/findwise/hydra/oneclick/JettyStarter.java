@@ -6,12 +6,12 @@ import org.mortbay.jetty.runner.Runner;
 
 public class JettyStarter {
 
-	private static final String LIB_DIR = "../lib";
+	private static final String LIB_DIR = "lib";
 	private static final String ADMIN_SERVICE_JAR = "hydra.war";
 	private static final String JETTY_OPTION_PORT = "--port";
 	private static final String JETTY_OPTION_PORT_DEFAULT = "9090";
 	private static final String JETTY_OPTION_LOG = "--log";
-	private static final String JETTY_OPTION_LOG_DEFAULT = "../logs/admin-service-log";
+	private static final String JETTY_OPTION_LOG_DEFAULT = "logs/admin-service.log";
 	private static final String JETTY_OPTION_PATH = "--path";
 	private static final String JETTY_OPTION_PATH_DEFAULT = "/hydra";
 
