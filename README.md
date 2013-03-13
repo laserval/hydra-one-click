@@ -3,13 +3,15 @@ hydra-one-click
 
 A simple Hydra setup package
 
-Run start.sh/start.bat to launch the Hydra pipeline and dependencies.
+1. Download the MongoDB distribution for your platform and put it in `mongodb/bin`
 
-Go to http://localhost:9090/hydra for the admin service REST endpoints:
+2. Run `start.sh`/`start.bat` to launch the Hydra pipeline and dependencies.
 
-/hydra/stages  -  GET the configured stages currently running
+3. Go to `http://localhost:9090/hydra` for the admin service REST endpoints:
 
-/hydra/documents/new  -  POST a new JSON document, see examples/documents
+  `/hydra/stages`  -  GET the configured stages currently running
+
+  `/hydra/documents/new`  -  POST a new JSON document, see examples/documents
 
 
-Processed documents will end up in ./data
+Processed documents will end up in `data`
